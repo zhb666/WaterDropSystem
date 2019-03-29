@@ -20,7 +20,7 @@
                 <el-form-item class="boxCode">
                   <el-input type="text" v-model="user.code" auto-complete="off"
                             placeholder="验证码" @keyup.13="login" suffix-icon="fa fa-lock"></el-input>
-                  <p class="codeTEXT">{{code}}</p>
+                  <p @click="SendCode" class="codeTEXT">{{code}}</p>
                 </el-form-item>
                 <el-form-item>
                   <el-button style="width:100%;" @click="Login" type="primary" id="btnclick" :loading="isLogsin" class="pull-right">
@@ -189,6 +189,7 @@
       background: #409EFF;
       text-align: center;
       color: #fff;
+      cursor: pointer;
     }
   }
 
