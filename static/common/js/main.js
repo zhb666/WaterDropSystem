@@ -48,7 +48,6 @@ Vue.prototype.changeSize = function () {
       pcWidth = '420px'
     }
   }
-
   return pcWidth
 }
 
