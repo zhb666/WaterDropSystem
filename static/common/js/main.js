@@ -40,7 +40,6 @@ Vue.prototype.Signout = function () {
 Vue.prototype.changeSize = function () {
   let pcWidth = `${document.documentElement.clientWidth}`;
   windSize()
-
   function windSize() {
     if (pcWidth < 1600) {
       pcWidth = '250px'
