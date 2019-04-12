@@ -74,11 +74,11 @@
             </el-table-column>
             <el-table-column label="操作" width="180px">
               <template slot-scope="scope">
-                <el-tooltip content="修改" placement="right" effect="light">
-                  <el-button size="mini" type="primary"
-                             @click="getUserId(scope.$index, scope.row)">修改
-                  </el-button>
-                </el-tooltip>
+                <!--<el-tooltip content="修改" placement="right" effect="light">-->
+                  <!--<el-button size="mini" type="primary"-->
+                             <!--@click="getUserId(scope.$index, scope.row)">修改-->
+                  <!--</el-button>-->
+                <!--</el-tooltip>-->
                 <el-tooltip content="删除" placement="right" effect="light">
                   <el-button size="mini" type="danger"
                              @click="deleteFun(scope.$index, scope.row)">删除
@@ -150,7 +150,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -180,7 +180,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -221,7 +221,7 @@
             this.showmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -269,7 +269,7 @@
             this.NewshowmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

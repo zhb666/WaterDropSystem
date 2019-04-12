@@ -133,7 +133,7 @@
             this.totalRecords = response.data.payload.totalRecords;
             this.logins = false;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -165,7 +165,7 @@
             this.totalRecords = response.data.payload.totalRecords;
             this.logins = false;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

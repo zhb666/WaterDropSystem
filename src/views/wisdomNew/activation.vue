@@ -242,7 +242,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -274,7 +274,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -296,7 +296,7 @@
             this.getcustomerlist = new Set(response.data.data);
             // console.log(this.getcustomerlist)
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -321,7 +321,7 @@
             this.getcustomerlist = new Set(response.data.data);
             // console.log(this.getcustomerlist)
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -359,7 +359,7 @@
             this.showmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -404,7 +404,7 @@
           if (response.data.code == 0) {
             this.getCode = response.data.data
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -442,7 +442,7 @@
             this.NewshowmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

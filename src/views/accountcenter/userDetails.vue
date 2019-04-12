@@ -288,7 +288,7 @@
             this.weChatPayRateValue = response.data.payload.merchants.weChatPayRate;
           }
           else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

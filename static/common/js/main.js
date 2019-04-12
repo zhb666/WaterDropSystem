@@ -6,7 +6,7 @@ import router from '../../../src/router'
 let domain = window.location.host;
 if (domain == 'localhost:8089' || domain == '192.168.1.248:8089') {
   //测试线上地址
-  Vue.prototype.ApiUrl = 'http://192.168.0.13:8088/studyassistant';
+  Vue.prototype.ApiUrl = 'http://192.168.0.5:8088/studyassistant';
 }
 else if (domain == 'admin.becent.cc') {
   Vue.prototype.ApiUrl = 'https://api-admin.becent.cc';

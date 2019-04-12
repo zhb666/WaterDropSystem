@@ -166,7 +166,7 @@
     margin: 10% auto;
   }
 
-  .el-input__suffix {
+    .el-input__suffix {
     left: -330px;
   }
 

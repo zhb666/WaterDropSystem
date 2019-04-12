@@ -6,7 +6,7 @@
 
       <el-form label-width="120px">
         <el-form-item label="客户 : ">
-          <el-input v-model="username" placeholder="客户"></el-input>
+          <el-input v-model="username" :disabled="true" placeholder="客户"></el-input>
         </el-form-item>
         <el-form-item label="客户描述 : ">
           <el-input v-model="remark" placeholder="客户描述"></el-input>
@@ -53,7 +53,7 @@
 
       <div slot="" class="dialog-footer" style="margin-top: 20px;text-align: right">
         <el-button @click="NewdialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="newXinjian()">确定</el-button>
+        <el-button type="primary" @click="newXinjian()">确`定</el-button>
       </div>
     </el-dialog>
 
@@ -206,7 +206,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -236,7 +236,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -299,7 +299,7 @@
             this.NewshowmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -347,6 +347,7 @@
       },
       //打开修改弹窗
       getUserId(index, row) {
+
         this.dialogFormVisible = true;
         this.userIdMask = row.id;
         this.username = row.name;
@@ -396,7 +397,7 @@
             this.sendCharge();
             this.dialogFormVisible = false;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

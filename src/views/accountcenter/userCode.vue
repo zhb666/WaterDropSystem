@@ -304,7 +304,7 @@
             this.totalRecords = response.data.payload.totalRecords;
             this.logins = false;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -351,7 +351,7 @@
             this.totalRecords = response.data.payload.totalRecords;
             this.logins = false;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -388,7 +388,7 @@
               });
               this.statusData();
             } else {
-              if (response.data.error.code == '403') {
+              if (response.data.code == '403') {
                 this.Signout();
               }
               this.$message.error(response.data.msg);
@@ -432,7 +432,7 @@
             this.dialogVisible = false;
             this.radio = '';
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.dialogVisible = false;
@@ -554,7 +554,7 @@
             this.imgURl = 'data:image/jpeg;base64,' + response.data.payload.imgObj;
             loading.close();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             if (response.data.success == false) {
@@ -619,7 +619,7 @@
             this.RemarksVisible = false;
             this.statusData();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

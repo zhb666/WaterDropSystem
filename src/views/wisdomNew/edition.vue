@@ -5,13 +5,13 @@
       <div style="margin: 20px auto"></div>
 
       <el-form label-width="120px">
-        <el-form-item label="版本号 : ">
-          <el-input v-model="actiCodeMask" placeholder="版本号"></el-input>
-        </el-form-item>
-        <el-form-item label="版本描述 : ">
-          <el-input v-model="userName" placeholder="版本描述"></el-input>
-        </el-form-item>
-      </el-form>
+      <el-form-item label="版本号 : ">
+        <el-input v-model="actiCodeMask" :disabled="true" placeholder="版本号"></el-input>
+      </el-form-item>
+      <el-form-item label="版本描述 : ">
+        <el-input v-model="userName" placeholder="版本描述"></el-input>
+      </el-form-item>
+    </el-form>
 
       <div slot="" class="dialog-footer" style="margin-top: 20px;text-align: right">
         <el-button @click="showmARKs">取 消</el-button>
@@ -157,7 +157,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -186,7 +186,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -232,7 +232,7 @@
             this.showmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -269,6 +269,27 @@
           return false
         }
 
+        let urls = this.ApiUrl + '/version/checkversion'
+        this.$http({
+          method: 'post',
+          url: urls,
+          data: qs.stringify({
+            version_number: this.NewactiCodeMask,
+          })
+        }).then((response) => {
+          if (response.data.code == 1009) {
+
+          } else {
+            return
+            if (response.data.code == '403') {
+              this.Signout();
+            }
+            this.$message.error(response.data.msg);
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+
         let url = this.ApiUrl + '/version/addversion'
         this.$http({
           method: 'post',
@@ -287,7 +308,7 @@
             this.NewshowmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

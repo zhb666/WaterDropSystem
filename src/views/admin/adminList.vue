@@ -6,7 +6,7 @@
 
       <el-form label-width="120px">
         <el-form-item label="账户 : ">
-          <el-input v-model="account" placeholder="账户"></el-input>
+          <el-input v-model="account" :disabled="true" placeholder="账户"></el-input>
         </el-form-item>
       </el-form>
       <el-form label-width="120px">
@@ -200,7 +200,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -230,7 +230,7 @@
             this.tableData = response.data.data.data;
             this.totalRecords = response.data.data.totalCount;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -255,14 +255,6 @@
         }
         if (this.username == '') {
           this.$message.error('错了哦，请输入名称');
-          return false
-        }
-        if (this.password == '') {
-          this.$message.error('错了哦，请输入密码');
-          return false
-        }
-        if (this.Setpassword == '') {
-          this.$message.error('错了哦，请输入验证密码');
           return false
         }
         if (this.Setpassword != this.password) {
@@ -290,7 +282,7 @@
             this.showmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -362,7 +354,8 @@
             this.NewshowmARKs();
             this.sendCharge();
           } else {
-            if (response.data.error.code == '403') {
+            console.log(1111)
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);

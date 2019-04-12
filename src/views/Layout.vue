@@ -180,7 +180,7 @@
           if (response.data.success == true) {
             this.mentList = response.data.payload;
           } else {
-            if (response.data.error.code == '403') {
+            if (response.data.code == '403') {
               this.Signout();
             }
             this.$message.error(response.data.msg);
@@ -193,7 +193,7 @@
       loginOut() {
         var self = this;
 
-        let url = this.ApiUrl + '/api/login/logout'
+        let url = this.ApiUrl + '/user/loginout'
         this.$http({
           method: 'get',
           url: url,
