@@ -37,6 +37,13 @@ const AdminList = resolve => {
   require(['@/views/admin/adminList.vue'], resolve)
 };
 
+const TypeAdmin = resolve => {
+  require(['@/views/wisdomNew/typeAdmin.vue'], resolve)
+};
+const UserAdmin = resolve => {
+  require(['@/views/wisdomNew/userAdmin.vue'], resolve)
+};
+
 //水滴智慧
 
 
@@ -106,6 +113,30 @@ const routes = [
       component: Subject,
       meta: {
         title: '客户管理',
+        requireAuth: true
+      }
+    }],
+  },
+  {
+    path: '/typeAdmin',
+    component: Layout,
+    children: [{
+      path: '/',
+      component: TypeAdmin,
+      meta: {
+        title: '类型管理',
+        requireAuth: true
+      }
+    }],
+  },
+  {
+    path: '/userAdmin',
+    component: Layout,
+    children: [{
+      path: '/',
+      component: UserAdmin,
+      meta: {
+        title: '用户管理',
         requireAuth: true
       }
     }],

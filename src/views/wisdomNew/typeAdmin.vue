@@ -5,87 +5,51 @@
       <div style="margin: 20px auto"></div>
 
       <el-form label-width="120px">
-        <el-form-item label="客户 : ">
-          <el-input v-model="username" :disabled="true" placeholder="客户"></el-input>
-        </el-form-item>
-        <el-form-item label="客户描述 : ">
-          <el-input v-model="remark" placeholder="客户描述"></el-input>
-        </el-form-item>
-        <el-form-item label="详细地址 : ">
-          <el-input v-model="address" placeholder="详细地址"></el-input>
-        </el-form-item>
-        <el-form-item label="联系方式 : ">
-          <el-input v-model="phone" placeholder="联系方式"></el-input>
-        </el-form-item>
-        <el-form-item label="联系人 : ">
-          <el-input v-model="contact" placeholder="联系人"></el-input>
-        </el-form-item>
         <el-form-item label="类型 : ">
-          <el-select v-model="ChangeCheckStatus" clearable placeholder="选择类型">
-            <el-option
-              track-by="$index"
-              v-for="item in getcustomerlist"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
+          <el-input v-model="ChangeCheckStatus"  placeholder="输入类型"></el-input>
         </el-form-item>
+        <!--<el-form-item label="类型 : ">-->
+          <!--<el-select v-model="ChangeCheckStatus" clearable placeholder="选择类型">-->
+            <!--<el-option-->
+              <!--track-by="$index"-->
+              <!--v-for="item in getcustomerlist"-->
+              <!--:key="item.name"-->
+              <!--:label="item.name"-->
+              <!--:value="item.name">-->
+            <!--</el-option>-->
+          <!--</el-select>-->
+        <!--</el-form-item>-->
       </el-form>
 
       <div slot="" class="dialog-footer" style="margin-top: 20px;text-align: right">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="showmARKs">取 消</el-button>
         <el-button type="primary" @click="sendAgent()">确定</el-button>
       </div>
     </el-dialog>
 
     <!--新建-->
-    <el-dialog :show-close="false" style="width: 1200px;margin: 0 auto;" title="新建"
-               :visible.sync="NewdialogFormVisible">
+    <el-dialog :show-close="false" style="width: 1200px;margin: 0 auto;" title="新建激活用户" :visible.sync="NewdialogFormVisible">
       <div style="margin: 20px auto"></div>
 
       <el-form label-width="120px">
-        <el-form-item label="客户 : ">
-          <el-input v-model="Newusername" placeholder="客户"></el-input>
-        </el-form-item>
-        <el-form-item label="客户描述 : ">
-          <el-input v-model="Newremark" placeholder="客户描述"></el-input>
-        </el-form-item>
-        <el-form-item label="详细地址 : ">
-          <el-input v-model="Newaddress" placeholder="详细地址"></el-input>
-        </el-form-item>
-        <el-form-item label="联系方式 : ">
-          <el-input v-model="Newphone" placeholder="联系方式"></el-input>
-        </el-form-item>
-        <el-form-item label="联系人 : ">
-          <el-input v-model="Newcontact" placeholder="联系人"></el-input>
-        </el-form-item>
         <el-form-item label="类型 : ">
-          <el-select v-model="NewChangeCheckStatus" clearable placeholder="选择类型">
-            <el-option
-              track-by="$index"
-              v-for="item in getcustomerlist"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
+          <el-input v-model="NewChangeCheckStatus"  placeholder="输入类型"></el-input>
         </el-form-item>
       </el-form>
 
       <div slot="" class="dialog-footer" style="margin-top: 20px;text-align: right">
         <el-button @click="NewdialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="newXinjian()">确`定</el-button>
+        <el-button type="primary" @click="newXinjian()">确定</el-button>
       </div>
     </el-dialog>
 
     <div class="animated fadeInDown">
       <el-row class="breadcrumb">
-        <el-col :span="4"><h3>客户管理</h3></el-col>
+        <el-col :span="4"><h3>类型管理</h3></el-col>
         <el-col :span="20">
           <el-breadcrumb separator="/">
             <el-breadcrumb-item>客户中心</el-breadcrumb-item>
-            <el-breadcrumb-item>客户管理</el-breadcrumb-item>
+            <el-breadcrumb-item>类型管理</el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
@@ -93,12 +57,8 @@
       <div class="addPadding">
 
         <div class="user_header">
-          <el-input v-model="name" placeholder="客户名"></el-input>
 
           <el-button style="float: right;margin-right: 2%" type="primary" @click="newInfoFun">新建</el-button>
-
-          <el-button type="primary" title="搜索" @click="sendCharge(1)" icon="el-icon-search"
-                     :loading="logins"></el-button>
 
         </div>
 
@@ -117,32 +77,11 @@
             </el-table-column>
             <el-table-column
               prop="name"
-              label="客户">
-            </el-table-column>
-            <el-table-column
-              prop="typename"
               label="类型">
             </el-table-column>
             <el-table-column
-              prop="phone"
-              label="联系方式">
-            </el-table-column>
-            <el-table-column
-              prop="contact"
-              label="联系人">
-            </el-table-column>
-            <el-table-column
-              prop="address"
-              label="地址">
-            </el-table-column>
-            <el-table-column
-              prop="num"
-              label="激活数量">
-            </el-table-column>
-            <el-table-column
-              prop="create_time"
-              width="190px;"
-              label="创建时间">
+              prop="custom_num"
+              label="客户数量">
             </el-table-column>
             <el-table-column label="操作" width="180px">
               <template slot-scope="scope">
@@ -182,12 +121,36 @@
   import qs from 'qs'
 
   export default {
-    name: "charge",
+    name: "typeAdmin",
     data() {
       return {
-        tableData: [],
+        options: [
+          {
+            value: '',
+            label: '全部'
+          },
+          {
+            value: '0',
+            label: '未激活'
+          },
+          {
+            value: '1',
+            label: '已激活'
+          },
+        ],
         getcustomerlist: [],
+        userName: '',//修改用户名
+        NewuserName: '',//新建用户名
+        showNameBox: false,//显示重复
+        showNameBoxTWO: false,//显示重复
+        offShowName: false,//根据这个来判断是不输入正确
+        NewoffShowName: false,//根据这个来判断是不输入正确
+        tableData: [],
+        ChangeCheckStatus: '',//修改用户信息下拉值
+        NewChangeCheckStatus:'',//新建用户信息下拉值
+        userIdMask: '',//ID
         name: '',//客户名
+        checkStatus: '', //状态
         NewdialogFormVisible: false,//新建
         dialogFormVisible: false,//修改
         limit: '', //每页条数 默认20
@@ -195,37 +158,21 @@
         totalRecords: 0,//总页数
         page: 1,//当前页码
         logins: false,
-
-        //修改参数
-        username: '',
-        remark: '',
-        address: '',
-        phone: '',
-        contact: '',
-        ChangeCheckStatus: '',//修改用户信息下拉值
-        //新增参数
-        Newusername: '',
-        Newremark: '',
-        Newaddress: '',
-        Newphone: '',
-        Newcontact: '',
-        NewChangeCheckStatus:'',//新建用户信息下拉值
+        open_off: false
       }
     },
     mounted() {
       this.sendCharge();
-      this.getListType();
     },
     methods: {
       //分页
       handleCurrentChange(val) {
         this.logins = true;
-        let url = this.ApiUrl + '/customer/getcustomerlistbypage'
+        let url = this.ApiUrl + '/custometype/getcustomertypelistbypage'
         this.$http({
           method: 'post',
           url: url,
           data: qs.stringify({
-            name: this.name,
             pageNum: val, //页码   默认1
             pageSize: 10, //每页条数 默认20
           })
@@ -251,12 +198,11 @@
           this.page = 1;
         }
         this.logins = true;
-        let url = this.ApiUrl + '/customer/getcustomerlistbypage'
+        let url = this.ApiUrl + '/custometype/getcustomertypelistbypage'
         this.$http({
           method: 'post',
           url: url,
           data: qs.stringify({
-            name: this.name,
             pageNum: this.page, //页码   默认1
             pageSize: 10, //每页条数 默认20
           })
@@ -276,8 +222,12 @@
         });
 
       },
-      //获取类型
-      getListType(){
+      //打开修改弹窗
+      getUserId(index, row) {
+        this.dialogFormVisible = true;
+        this.userIdMask = row.id;
+        this.actiCodeMask = row.activation_code;
+
         //获取客户列表
         let url = this.ApiUrl + '/custometype/getallcustomtype'
         this.$http({
@@ -296,56 +246,76 @@
           console.log(error);
         });
       },
-      //新增信息
-      newInfoFun() {
-        this.NewdialogFormVisible = true;
-      },
-      //  关闭新建弹窗
-      NewshowmARKs() {
-        this.NewdialogFormVisible = false;
-        this.Newremark = '';
-        this.Newaddress = '';
-        this.Newphone = '';
-        this.Newusername = '';
-        this.Newcontact = '';
-      },
-      //确定新建
-      newXinjian() {
-        if (this.Newusername == '') {
-          this.$message.error('错了哦，请输入正确的用户名');
-          return false
-        } else if (this.Newremark == '') {
-          this.$message.error('错了哦，请输入客户描述');
-          return false
-        } else if (this.Newaddress == '') {
-          this.$message.error('错了哦，请输入详细地址');
-          return false
-        } else if (this.Newphone == '') {
-          this.$message.error('错了哦，请输入电话');
-          return false
-        } else if (this.Newcontact == '') {
-          this.$message.error('错了哦，请输入联系人');
-          return false
-        }
-        else if (this.NewChangeCheckStatus == '') {
+      //确定修改
+      sendAgent() {
+        if (this.ChangeCheckStatus == '') {
           this.$message.error('错了哦，请选择类型');
           return false
         }
 
-        let url = this.ApiUrl + '/customer/addcustomer'
+        let url = this.ApiUrl + '/custometype/updatecustomertype'
         this.$http({
           method: 'post',
           url: url,
           data: qs.stringify({
-            name: this.Newusername,
-            remark: this.Newremark,
-            address: this.Newaddress,
-            phone: this.Newphone,
-            contact: this.Newcontact,
-            type_id:this.NewChangeCheckStatus
+            id: this.userIdMask,
+            name: this.ChangeCheckStatus,
           })
         }).then((response) => {
           if (response.data.code == 0) {
+            this.$notify({
+              title: '修改成功',
+              message: '这是一条成功的提示消息',
+              type: 'success'
+            });
+            this.showmARKs();
+            this.sendCharge();
+          } else {
+            if (response.data.code == '403') {
+              this.Signout();
+            }
+            this.$message.error(response.data.msg);
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+
+      },
+      //  关闭修改弹窗
+      showmARKs() {
+        this.dialogFormVisible = false;
+        this.userName = '';
+        this.showNameBox = false;
+        this.showNameBoxTWO = false;
+      },
+      //  关闭新建弹窗
+      NewshowmARKs() {
+        this.NewdialogFormVisible = false;
+        this.NewuserName = '';
+        this.NewChangeCheckStatus = '';
+        this.showNameBox = false;
+        this.showNameBoxTWO = false;
+      },
+      //新增信息
+      newInfoFun() {
+        this.NewdialogFormVisible = true;
+      },
+      //确定新建
+      newXinjian() {
+        if (this.NewChangeCheckStatus == '') {
+          this.$message.error('错了哦，请输入类型');
+          return false
+        }
+
+        let url = this.ApiUrl + '/custometype/addcustomertype'
+        this.$http({
+          method: 'post',
+          url: url,
+          data: qs.stringify({
+            name: this.NewChangeCheckStatus,
+          })
+        }).then((response) => {
+          if (response.data.code == 0){
             this.$notify({
               title: '新建成功',
               message: '这是一条成功的提示消息',
@@ -371,7 +341,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          let url = this.ApiUrl + '/customer/delcustomer'
+          let url = this.ApiUrl + '/custometype/delcustomertype'
           this.$http({
             method: 'post',
             url: url,
@@ -386,7 +356,8 @@
                 type: 'success'
               });
               this.sendCharge();
-            } else {
+            }
+            else {
               this.$message.error(response.data.msg);
             }
           }).catch((error) => {
@@ -399,72 +370,6 @@
             message: '已取消审核'
           });
         });
-      },
-      //打开修改弹窗
-      getUserId(index, row) {
-
-        this.dialogFormVisible = true;
-        this.userIdMask = row.id;
-        this.username = row.name;
-        this.remark = row.remark;
-        this.address = row.address;
-        this.phone = row.phone;
-        this.contact = row.contact;
-      },
-      //确定修改
-      sendAgent() {
-        if (this.username == '') {
-          this.$message.error('错了哦，请输入正确的用户名');
-          return false
-        } else if (this.remark == '') {
-          this.$message.error('错了哦，请输入客户描述');
-          return false
-        } else if (this.address == '') {
-          this.$message.error('错了哦，请输入详细地址');
-          return false
-        } else if (this.phone == '') {
-          this.$message.error('错了哦，请输入电话');
-          return false
-        } else if (this.contact == '') {
-          this.$message.error('错了哦，请输入联系人');
-          return false
-        } else if (this.ChangeCheckStatus == '') {
-          this.$message.error('错了哦，请选择类型');
-          return false
-        }
-
-        let url = this.ApiUrl + '/customer/updatecustomer'
-        this.$http({
-          method: 'post',
-          url: url,
-          data: qs.stringify({
-            id: this.userIdMask,
-            name: this.username,
-            remark: this.remark,
-            address: this.address,
-            phone: this.phone,
-            contact: this.contact,
-            type_id:this.ChangeCheckStatus
-          })
-        }).then((response) => {
-          if (response.data.code == 0) {
-            this.$notify({
-              title: '修改成功',
-              message: '这是一条成功的提示消息',
-              type: 'success'
-            });
-            this.sendCharge();
-            this.dialogFormVisible = false;
-          } else {
-            if (response.data.code == '403') {
-              this.Signout();
-            }
-            this.$message.error(response.data.msg);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-
       },
     },
   }

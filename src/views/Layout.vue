@@ -103,6 +103,16 @@
               <span slot="title">客户管理</span>
             </el-menu-item>
 
+            <el-menu-item index="/typeAdmin">
+              <i class="fa fa-fw fa-cog"></i>
+              <span slot="title">类型管理</span>
+            </el-menu-item>
+
+            <el-menu-item index="/userAdmin">
+              <i class="fa fa-fw fa-users"></i>
+              <span slot="title">用户管理</span>
+            </el-menu-item>
+
 
           </el-submenu>
 
