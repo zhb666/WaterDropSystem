@@ -13,9 +13,9 @@
             <el-option
               track-by="$index"
               v-for="item in getcustomerlist"
-              :key="item.name"
+              :key="item.id"
               :label="item.name"
-              :value="item.name">
+              :value="item.id">
             </el-option>
           </el-select>
           <!--<el-input v-model="bankRate" :disabled="true" placeholder="客户"></el-input>-->
@@ -46,9 +46,9 @@
             <el-option
               track-by="$index"
               v-for="item in getcustomerlist"
-              :key="item.name"
+              :key="item.id"
               :label="item.name"
-              :value="item.name">
+              :value="item.id">
             </el-option>
           </el-select>
           <!--<el-input v-model="bankRate" :disabled="true" placeholder="客户"></el-input>-->
@@ -119,7 +119,7 @@
             </el-table-column>
             <el-table-column
               prop="name"
-              label="客户">
+              label="用户">
             </el-table-column>
             <el-table-column
               prop="create_time"
@@ -428,7 +428,7 @@
           method: 'post',
           url: url,
           data: qs.stringify({
-            use_name: this.NewChangeCheckStatus,
+            id: this.NewChangeCheckStatus,
             name: this.NewuserName,
             activation_code:this.getCode
           })
@@ -483,10 +483,10 @@
           });
 
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消审核'
-          });
+          // this.$message({
+          //   type: 'info',
+          //   message: '已取消审核'
+          // });
         });
       },
     },

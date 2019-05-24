@@ -16,7 +16,7 @@
               <template slot="title"><img src="../assets/head.gif" style="width:30px;border-radius: 20px;">
                 {{$store.state.name}}
               </template>
-              <el-menu-item index="/my/profile"><i class="fa fa-fw fa-cog"></i> 个人设置</el-menu-item>
+              <!--<el-menu-item index="/my/profile"><i class="fa fa-fw fa-cog"></i> 个人设置</el-menu-item>-->
               <el-menu-item @click="loginOut" index=""><i class="fa fa-fw fa-sign-out"></i> 安全退出</el-menu-item>
             </el-submenu>
           </el-menu>
