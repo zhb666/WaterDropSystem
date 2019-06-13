@@ -59,6 +59,10 @@
     methods: {
       //登录
       Login(){
+
+        this.$router.push({path: '/activation'});
+        return
+
         if (this.user.userName == '') {
           this.$message.error('错了哦，请填写用户名');
           return false
