@@ -12,7 +12,7 @@ const Dashboard = resolve => {
   require(['@/views/Dashboard.vue'], resolve)
 };
 const Profile = resolve => {
-  require(['@/views/my/Profile.vue'], resolve)
+  require(['@/views/my/Profile.vue'], resolve) 
 };
 
 
