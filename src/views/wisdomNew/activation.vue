@@ -1,91 +1,140 @@
 <template>
   <div class="user">
 
-    <el-dialog :show-close="false" style="width: 1200px;margin: 0 auto;" title="修改信息" :visible.sync="dialogFormVisible">
-      <div style="margin: 20px auto"></div>
+      <el-dialog
+          title="新增游戏"
+          :visible.sync="centerDialogVisible"
+          width="30%"
+          center>
+      
 
-      <el-form label-width="120px">
-        <el-form-item label="激活码 : ">
-          <el-input v-model="actiCodeMask" :disabled="true" placeholder="激活码"></el-input>
-        </el-form-item>
-        <el-form-item label="客户 : ">
-          <el-select v-model="ChangeCheckStatus" clearable placeholder="选择客户">
-            <el-option
-              track-by="$index"
-              v-for="item in getcustomerlist"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <!--<el-input v-model="bankRate" :disabled="true" placeholder="客户"></el-input>-->
-        </el-form-item>
-        <el-form-item label="用户名称 : ">
-          <el-input v-model="userName" placeholder="用户名称"></el-input>
-          <el-tag v-show="showNameBox" type="danger">名称出现重复</el-tag>
-          <el-tag v-show="showNameBoxTWO" type="success">名称可用</el-tag>
-        </el-form-item>
-      </el-form>
+          <el-form ref="form"  label-width="100px">
 
-      <div slot="" class="dialog-footer" style="margin-top: 20px;text-align: right">
-        <el-button @click="showmARKs">取 消</el-button>
-        <el-button type="primary" @click="sendAgent()">确定</el-button>
-      </div>
-    </el-dialog>
+              <el-form-item label="game_id :">
+                  <el-input  v-model="game_idNew" placeholder="游戏ID" class="handle-input mr10"></el-input>
+              </el-form-item>
+              <el-form-item label="game_name :">
+                  <el-input v-model="game_nameNew" placeholder="游戏名字" class="handle-input mr10"></el-input>
+              </el-form-item>
+              <el-form-item label="rate :">
+                  <el-input v-model="rate" placeholder="倍率" class="handle-input mr10"></el-input>
+              </el-form-item>
 
-    <!--新建-->
-    <el-dialog :show-close="false" style="width: 1200px;margin: 0 auto;" title="新建激活用户" :visible.sync="NewdialogFormVisible">
-      <div style="margin: 20px auto"></div>
+              <el-form-item label="vendor :">
+                  <el-select v-model="vendorNew" clearable placeholder="供应商">
+                    <el-option
+                      v-for="item in optionsVendor"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+              </el-form-item>
 
-      <el-form label-width="120px">
-        <el-form-item label="激活码 : ">
-          <el-input v-model="getCode" :disabled="true" placeholder="激活码"></el-input>
-        </el-form-item>
-        <el-form-item label="客户 : ">
-          <el-select v-model="NewChangeCheckStatus" clearable placeholder="选择客户">
-            <el-option
-              track-by="$index"
-              v-for="item in getcustomerlist"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <!--<el-input v-model="bankRate" :disabled="true" placeholder="客户"></el-input>-->
-        </el-form-item>
-        <el-form-item label="用户名称 : ">
-          <el-input v-model="NewuserName" placeholder="用户名称"></el-input>
-          <el-tag v-show="showNameBox" type="danger">名称出现重复</el-tag>
-          <el-tag v-show="showNameBoxTWO" type="success">名称可用</el-tag>
-        </el-form-item>
-      </el-form>
+              <el-form-item label="em_type :">
+                  <el-select v-model="em_typeNew" clearable placeholder="游戏类型">
+                    <el-option
+                      v-for="item in emType"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+              </el-form-item>
 
-      <div slot="" class="dialog-footer" style="margin-top: 20px;text-align: right">
-        <el-button @click="NewdialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="newXinjian()">确定</el-button>
-      </div>
-    </el-dialog>
+          </el-form>
+
+          <span slot="footer" class="dialog-footer">
+              <el-button @click="centerDialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="addGame">确 定</el-button>
+          </span>
+      </el-dialog>
+
+
+      <el-dialog
+          title="修改参数"
+          :visible.sync="centerDialogVisibleChange"
+          width="30%"
+          center>
+      
+
+          <el-form ref="form"  label-width="100px">
+
+              <el-form-item label="game_id :">
+                  <el-input  v-model="game_idChange" placeholder="游戏ID" class="handle-input mr10"></el-input>
+              </el-form-item>
+              <el-form-item label="game_name :">
+                  <el-input v-model="game_nameChange" placeholder="游戏名字" class="handle-input mr10"></el-input>
+              </el-form-item>
+              <el-form-item label="rate :">
+                  <el-input v-model="rateChange" placeholder="倍率" class="handle-input mr10"></el-input>
+              </el-form-item>
+
+              <el-form-item label="vendor :">
+                  <el-select v-model="vendorChange" clearable placeholder="供应商">
+                    <el-option
+                      v-for="item in optionsVendor"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+              </el-form-item>
+
+              <el-form-item label="em_type :">
+                  <el-select v-model="em_typeChange" clearable placeholder="游戏类型">
+                    <el-option
+                      v-for="item in emType"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+              </el-form-item>
+
+              <el-form-item label="status :">
+                  <el-select v-model="status" clearable placeholder="状态">
+                    <el-option
+                      v-for="item in statusOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+              </el-form-item>
+
+          </el-form>
+
+          <span slot="footer" class="dialog-footer">
+              <el-button @click="centerDialogVisibleChange = false">取 消</el-button>
+              <el-button type="primary" @click="updateGame">确 定</el-button>
+          </span>
+      </el-dialog>
+
+
+      
 
     <div class="animated fadeInDown">
       <el-row class="breadcrumb">
-        <el-col :span="4"><h3>激活管理</h3></el-col>
+        <el-col :span="4"><h3>游戏中心</h3></el-col>
         <el-col :span="20">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item>客户中心</el-breadcrumb-item>
-            <el-breadcrumb-item>激活管理</el-breadcrumb-item>
+            <el-breadcrumb-item>游戏中心</el-breadcrumb-item>
+            <el-breadcrumb-item>类型管理</el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
+      
 
       <div class="addPadding">
 
         <div class="user_header">
-          <el-input v-model="name" placeholder="客户名"></el-input>
-          <el-input v-model="actiCode" placeholder="激活码"></el-input>
 
-          <el-button style="float: right;margin-right: 2%" type="primary" @click="newInfoFun">新建</el-button>
+          <el-input v-model="game_id" placeholder="游戏ID"></el-input>
 
-          <el-select v-model="checkStatus" clearable placeholder="选择状态">
+          <el-input v-model="game_name" placeholder="游戏名字"></el-input>
+
+          <el-select v-model="vendor" clearable placeholder="供应商">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -94,9 +143,31 @@
             </el-option>
           </el-select>
 
+          <el-select v-model="em_type" clearable placeholder="游戏类型">
+            <el-option
+              v-for="item in emType"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
 
-          <el-button type="primary" title="搜索" @click="sendCharge(1)" icon="el-icon-search"
-                     :loading="logins"></el-button>
+          <el-date-picker
+            v-model="timeArr"
+            type="daterange"
+            range-separator="至"
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd"
+            :clearable="false"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+
+          <el-button style="float: right;margin-right: 2%" type="primary" @click="centerDialogVisible=true">新增产品</el-button>
+
+          <el-button type="primary" @click="sendCharge">搜索</el-button>
+
+          <el-button style="float: right;margin-right: 1%" type="warning" @click="setRate">刷新倍率</el-button>
 
         </div>
 
@@ -110,30 +181,28 @@
             element-loading-background="rgba(33, 33, 33, 0.8)"
             style="width: 100%">
             <el-table-column
-              prop="id"
-              label="ID">
+              prop="vendor"
+              label="供应商">
             </el-table-column>
             <el-table-column
-              prop="activation_code"
-              label="激活码">
+              prop="game_id"
+              label="游戏ID">
             </el-table-column>
             <el-table-column
-              prop="name"
-              label="用户">
+              prop="game_name"
+              label="游戏名字">
             </el-table-column>
             <el-table-column
-              prop="create_time"
-              width="190px;"
-              label="创建时间">
+              prop="em_type"
+              label="游戏类型">
             </el-table-column>
             <el-table-column
-              prop="activation_time"
-              width="190px;"
-              label="激活时间">
-            </el-table-column>
-            <el-table-column
-              :formatter="isReviewed"
+              :formatter="isStatus"
               label="状态">
+            </el-table-column>
+            <el-table-column
+              prop="rate"
+              label="产品倍率">
             </el-table-column>
             <el-table-column label="操作" width="180px">
               <template slot-scope="scope">
@@ -144,7 +213,7 @@
                 </el-tooltip>
                 <el-tooltip content="删除" placement="right" effect="light">
                   <el-button size="mini" type="danger"
-                             @click="deleteFun(scope.$index, scope.row)">删除
+                             @click="deleteFun(scope.$index, scope.row)">停用
                   </el-button>
                 </el-tooltip>
               </template>
@@ -153,7 +222,7 @@
 
         </div>
 
-        <div class="pageBox" v-show="totalRecords>10">
+        <!-- <div class="pageBox" v-show="totalRecords>10">
           <el-pagination
             @current-change="handleCurrentChange"
             :current-page.sync="page"
@@ -161,7 +230,7 @@
             layout="prev, pager, next, jumper"
             :total="totalRecords">
           </el-pagination>
-        </div>
+        </div> -->
 
       </div>
 
@@ -173,70 +242,230 @@
   import qs from 'qs'
 
   export default {
-    name: "charge",
+    name: "typeAdmin",
     data() {
       return {
-        options: [
-          {
-            value: '',
-            label: '全部'
-          },
+        statusOptions:[
           {
             value: '0',
-            label: '未激活'
+            label: '在线'
           },
           {
             value: '1',
-            label: '已激活'
+            label: '已下线'
           },
         ],
-        getcustomerlist: [],
-        userName: '',//修改用户名
-        NewuserName: '',//新建用户名
-        showNameBox: false,//显示重复
-        showNameBoxTWO: false,//显示重复
-        offShowName: false,//根据这个来判断是不输入正确
-        NewoffShowName: false,//根据这个来判断是不输入正确
+        options: [
+          {
+            value: 'all',
+            label: 'all'
+          },
+          {
+            value: 'hub88',
+            label: 'hub88'
+          },
+          {
+            value: 'em',
+            label: 'em'
+          },
+        ],
+        optionsVendor:[
+          {
+            value: 'hub88',
+            label: 'hub88'
+          },
+          {
+            value: 'em',
+            label: 'em'
+          },
+        ],
+        emType: [
+          {
+            value: 'slots',
+            label: 'slots'
+          },
+          {
+            value: 'table',
+            label: 'table'
+          },
+          {
+            value: 'live',
+            label: 'live'
+          },
+        ],
+       
         tableData: [],
         ChangeCheckStatus: '',//修改用户信息下拉值
         NewChangeCheckStatus:'',//新建用户信息下拉值
-        actiCode: '',//激活码
-        actiCodeMask: '',//激活码
-        getCode:'',//获取激活码
         userIdMask: '',//ID
         name: '',//客户名
-        checkStatus: '', //状态
-        NewdialogFormVisible: false,//新建
+        vendor: '', //vendor
+        em_type:'',//em_type
+        game_id:'',//game_id
+        game_name:'',//game_name
+        timeArr:[],//时间选项
+        
         dialogFormVisible: false,//修改
         limit: '', //每页条数 默认20
-        Toexamine: false,//审核状态
+        
         totalRecords: 0,//总页数
         page: 1,//当前页码
         logins: false,
-        open_off: false
+        open_off: false,
+        centerDialogVisible: false,
+        centerDialogVisibleChange: false,
+
+        vendorNew: '', //vendorNew
+        em_typeNew:'',//em_typeNew
+        game_idNew:'',//game_idNew
+        game_nameNew:'',//game_nameNew
+        rate:'',
+
+        vendorChange: '', //vendorNew
+        em_typeChange:'',//em_typeNew
+        game_idChange:'',//game_idNew
+        game_nameChange:'',//game_nameNew
+        rateChange:'',
+        id:'',
+        status:''
       }
     },
     mounted() {
-      this.sendCharge();
-      this.getnameList();
+      // this.test();
     },
     methods: {
-      //分页
-      handleCurrentChange(val) {
-        this.logins = true;
-        let url = this.ApiUrl + '/activation/getactivationlistbypage'
+
+      setRate(){
+        let url = this.ApiUrl + '/supply/setRate'
+        this.$http({
+          method: 'post',
+          url: url,
+          
+        }).then((response) => {
+          if (response.status == 200) {
+              this.$notify({
+                title: '刷新成功',
+                message: '这是一条成功的提示消息',
+                type: 'success'
+              });
+              
+              this.sendCharge();
+            }
+            else {
+              this.$message.error(response.statusText);
+            }
+          
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+
+      addGame(){
+
+        let url = this.ApiUrl + '/supply/addGame'
         this.$http({
           method: 'post',
           url: url,
           data: qs.stringify({
-            name: this.name,
-            activation_code: this.actiCode,
-            type: this.checkStatus, //状态 0待审核 1审核通过 2异常
+            vendor: this.vendorNew,
+            em_type:this.em_typeNew,
+            game_id:this.game_idNew,
+            game_name:this.game_nameNew,
+            rate:this.rate
+          })
+        }).then((response) => {
+          if (response.status == 200) {
+              this.$notify({
+                title: '新增成功',
+                message: '这是一条成功的提示消息',
+                type: 'success'
+              });
+              this.centerDialogVisible = false;
+              this.sendCharge();
+            }
+            else {
+              this.$message.error(response.statusText);
+            }
+          // if (response.data.code == 0) {
+          //   this.logins = false;
+          //   this.tableData = response.data.data.data;
+          //   this.totalRecords = response.data.data.totalCount;
+          // } else {
+          //   if (response.data.code == '403') {
+          //     this.Signout();
+          //   }
+          //   this.$message.error(response.data.msg);
+          // }
+        }).catch((error) => {
+          console.log(error);
+        });
+
+      },
+
+      updateGame(){
+
+        let url = this.ApiUrl + '/supply/updateGame'
+        this.$http({
+          method: 'post',
+          url: url,
+          data: qs.stringify({
+            vendor: this.vendorChange,
+            em_type:this.em_typeChange,
+            game_id:this.game_idChange,
+            game_name:this.game_nameChange,
+            rate:this.rateChange,
+            id:this.id,
+            status:this.status
+          })
+        }).then((response) => {
+          if (response.status == 200) {
+              this.$notify({
+                title: '修改成功',
+                message: '这是一条成功的提示消息',
+                type: 'success'
+              });
+              this.centerDialogVisibleChange = false;
+              this.sendCharge();
+            }
+            else {
+              this.$message.error(response.statusText);
+            }
+          
+        }).catch((error) => {
+          console.log(error);
+        });
+
+      },
+
+      //赋值参数
+      getUserId(index,row){
+
+        this.vendorChange = row.vendor;
+        this.em_typeChange = row.em_type;
+        this.game_idChange = row.game_id;
+        this.game_nameChange = row.game_name;
+        this.rateChange = row.rate;
+        this.status = row.status;
+        this.id = row.id;
+        this.centerDialogVisibleChange = true;
+
+
+        console.log(row.em_type)
+
+      },
+
+      //分页
+      handleCurrentChange(val) {
+        this.logins = true;
+        let url = this.ApiUrl + '/custometype/getcustomertypelistbypage'
+        this.$http({
+          method: 'post',
+          url: url,
+          data: qs.stringify({
             pageNum: val, //页码   默认1
             pageSize: 10, //每页条数 默认20
           })
         }).then((response) => {
-
           if (response.data.code == 0) {
             this.logins = false;
             this.tableData = response.data.data.data;
@@ -257,201 +486,38 @@
           this.page = 1;
         }
         this.logins = true;
-        let url = this.ApiUrl + '/activation/getactivationlistbypage'
+        let url = this.ApiUrl + '/supply/list'
         this.$http({
-          method: 'post',
-          url: url,
-          data: qs.stringify({
-            name: this.name,
-            activation_code: this.actiCode,
-            type: this.checkStatus, //状态 0待审核 1审核通过 2异常
-            pageNum: this.page, //页码   默认1
-            pageSize: 10, //每页条数 默认20
-          })
+          method: 'get',
+          url: url,      
+          params: {
+            vendor:this.vendor,
+            em_type:this.em_type,
+            game_id:this.game_id,
+            game_name:this.game_name
+          }
         }).then((response) => {
-          if (response.data.code == 0) {
+          if (response.status == 200) {
             this.logins = false;
-            this.tableData = response.data.data.data;
-            this.totalRecords = response.data.data.totalCount;
+            let list = [];
+            for(var i in response.data.data){
+                list.push(response.data.data[i]);
+            }
+            this.tableData = list;
+            // this.totalRecords = response.data.data.totalCount;
           } else {
             if (response.data.code == '403') {
               this.Signout();
             }
-            this.$message.error(response.data.msg);
+            this.$message.error(response.statusText);
+
+            
           }
         }).catch((error) => {
           console.log(error);
         });
 
-      },
-      //下拉获取客户列表
-      getnameList(){
-        //获取客户列表
-        let url = this.ApiUrl + '/customer/getcustomerlist'
-        this.$http({
-          method: 'post',
-          url: url,
-        }).then((response) => {
-          if (response.data.code == 0) {
-            this.getcustomerlist = new Set(response.data.data);
-            // console.log(this.getcustomerlist)
-          } else {
-            if (response.data.code == '403') {
-              this.Signout();
-            }
-            this.$message.error(response.data.msg);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      //打开修改弹窗
-      getUserId(index, row) {
-        this.dialogFormVisible = true;
-        this.userIdMask = row.id;
-        this.actiCodeMask = row.activation_code;
-
-        //获取客户列表
-        let url = this.ApiUrl + '/customer/getcustomerlist'
-        this.$http({
-          method: 'post',
-          url: url,
-        }).then((response) => {
-          if (response.data.code == 0) {
-            this.getcustomerlist = new Set(response.data.data);
-            // console.log(this.getcustomerlist)
-          } else {
-            if (response.data.code == '403') {
-              this.Signout();
-            }
-            this.$message.error(response.data.msg);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      //确定修改
-      sendAgent() {
-        if (this.ChangeCheckStatus == '') {
-          this.$message.error('错了哦，请选择客户');
-          return false
-        } else if (this.offShowName == false || this.userName == '') {
-          this.$message.error('错了哦，请输入正确的用户名');
-          return false
-        }
-
-        let url = this.ApiUrl + '/activation/updateactivation'
-        this.$http({
-          method: 'post',
-          url: url,
-          data: qs.stringify({
-            id: this.userIdMask,
-            use_name: this.ChangeCheckStatus,
-            name: this.userName
-          })
-        }).then((response) => {
-          if (response.data.code == 0) {
-            this.$notify({
-              title: '修改成功',
-              message: '这是一条成功的提示消息',
-              type: 'success'
-            });
-            this.showmARKs();
-            this.sendCharge();
-          } else {
-            if (response.data.code == '403') {
-              this.Signout();
-            }
-            this.$message.error(response.data.msg);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-
-      },
-      //判断审核状态
-      isReviewed(Reviewed) {
-        if (Reviewed.type == 1) {
-          return '已激活'
-        } else {
-          return '未激活'
-        }
-      },
-      //  关闭修改弹窗
-      showmARKs() {
-        this.dialogFormVisible = false;
-        this.userName = '';
-        this.showNameBox = false;
-        this.showNameBoxTWO = false;
-      },
-      //  关闭新建弹窗
-      NewshowmARKs() {
-        this.NewdialogFormVisible = false;
-        this.NewuserName = '';
-        this.NewChangeCheckStatus = '';
-        this.showNameBox = false;
-        this.showNameBoxTWO = false;
-      },
-      //新增信息
-      newInfoFun() {
-        this.NewdialogFormVisible = true;
-        //获取激活码
-        let url = this.ApiUrl + '/activation/useractivation'
-        this.$http({
-          method: 'post',
-          url: url,
-        }).then((response) => {
-          if (response.data.code == 0) {
-            this.getCode = response.data.data
-          } else {
-            if (response.data.code == '403') {
-              this.Signout();
-            }
-            this.$message.error(response.data.msg);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      //确定新建
-      newXinjian() {
-        if (this.NewChangeCheckStatus == '') {
-          this.$message.error('错了哦，请选择客户');
-          return false
-        } else if (this.NewoffShowName == false || this.NewuserName == '') {
-          this.$message.error('错了哦，请输入正确的用户名');
-          return false
-        }
-
-        let url = this.ApiUrl + '/activation/addactivation'
-        this.$http({
-          method: 'post',
-          url: url,
-          data: qs.stringify({
-            id: this.NewChangeCheckStatus,
-            name: this.NewuserName,
-            activation_code:this.getCode
-          })
-        }).then((response) => {
-          if (response.data.code == 0){
-            this.$notify({
-              title: '新建成功',
-              message: '这是一条成功的提示消息',
-              type: 'success'
-            });
-            this.NewshowmARKs();
-            this.sendCharge();
-          } else {
-            if (response.data.code == '403') {
-              this.Signout();
-            }
-            this.$message.error(response.data.msg);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-
-      },
+      },  
       //删除
       deleteFun(index, row) {
         this.$confirm('确定删除？', '提示', {
@@ -459,15 +525,15 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          let url = this.ApiUrl + '/activation/delactivation'
+          let url = this.ApiUrl + '/supply/offlineGame'
           this.$http({
-            method: 'post',
-            url: url,
-            data: qs.stringify({
-              id: row.id,
-            })
+            method: 'get',
+            url: url,      
+            params: {
+              id:row.id
+            }
           }).then((response) => {
-            if (response.data.code == 0) {
+            if (response.status == 200) {
               this.$notify({
                 title: '删除成功',
                 message: '这是一条成功的提示消息',
@@ -476,76 +542,28 @@
               this.sendCharge();
             }
             else {
-              this.$message.error(response.data.msg);
+              this.$message.error(response.statusText);
             }
           }).catch((error) => {
             console.log(error);
           });
 
         }).catch(() => {
-          // this.$message({
-          //   type: 'info',
-          //   message: '已取消审核'
-          // });
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          });
         });
+      },
+      //判断审核状态
+      isStatus(status) {
+        if(status.status==0){
+          return '在线'
+        }else{
+          return '已下线'
+        }
       },
     },
-    watch: {
-      userName(val, oldVal) {//普通的watch监听
-        let url = this.ApiUrl + '/activation/checkactivation'
-        this.$http({
-          method: 'post',
-          url: url,
-          data: qs.stringify({
-            use_name: val
-          })
-        }).then((response) => {
-          if (response.data.code != 1011) {
-            this.showNameBox = true;
-            this.showNameBoxTWO = false;
-            this.offShowName = false;
-          } else {
-            this.showNameBox = false;
-            this.showNameBoxTWO = true;
-            this.offShowName = true;
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-        if (val == '') {
-          console.log(11111)
-          this.showNameBox = false;
-          this.showNameBoxTWO = false;
-        }
-      },
-      NewuserName(val, oldVal) {//普通的watch监听
-        let url = this.ApiUrl + '/activation/checkactivation'
-        this.$http({
-          method: 'post',
-          url: url,
-          data: qs.stringify({
-            use_name: val
-          })
-        }).then((response) => {
-          if (response.data.code != 1011) {
-            this.showNameBox = true;
-            this.showNameBoxTWO = false;
-            this.NewoffShowName = false;
-          } else {
-            this.showNameBox = false;
-            this.showNameBoxTWO = true;
-            this.NewoffShowName = true;
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-        if (val == '') {
-          console.log(11111)
-          this.showNameBox = false;
-          this.showNameBoxTWO = false;
-        }
-      },
-    }
   }
 </script>
 

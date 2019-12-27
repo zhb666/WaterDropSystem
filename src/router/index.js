@@ -53,7 +53,7 @@ const routes = [
     component: Login,
     name: 'login',
     meta: {
-      title: '水滴智慧管理系统',
+      title: '管理系统',
       requireAuth: false
     }
   },

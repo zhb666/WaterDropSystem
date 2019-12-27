@@ -7,7 +7,7 @@
           <el-col :model="user">
             <el-card class="login-box" v-loading="$store.state.loading" element-loading-background="rgba(33, 33, 33, 0.8)">
               <el-form>
-                <h1 class="title" style="margin: 20px 0;font-size: 24px;">水滴管理系统</h1>
+                <h1 class="title" style="margin: 20px 0;font-size: 24px;">管理系统</h1>
                 <!--<p class="login-box-msg">水滴管理系统</p>-->
                 <el-form-item>
                   <el-input type="text" v-model="user.userName" auto-complete="off"
@@ -54,7 +54,7 @@
     mounted() {
       // this.Verification();
       // this.TestLogin();
-      this.SendCode();
+      // this.SendCode();
     },
     methods: {
       //登录

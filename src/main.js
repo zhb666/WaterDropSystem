@@ -15,8 +15,8 @@ Vue.use(ElementUI);
 Vue.use(VueQuillEditor);
 Vue.use(Vuex)
 Vue.prototype.$http = axios;
-Vue.prototype.$http.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';// 配置请求头
-Vue.prototype.$http.defaults.withCredentials = true; //请求携带cookie
+// Vue.prototype.$http.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';// 配置请求头
+// Vue.prototype.$http.defaults.withCredentials = true; //请求携带cookie
 // Vue.prototype.$http.crossDomain = true; //请求携带额外数据(不包含cookie)
 
 

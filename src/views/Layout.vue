@@ -7,7 +7,7 @@
                src="../../static/common/images/open.png"
                alt="">
           <img style="float: left;margin: 18px 20px 0 20px;" src="../../static/common/images/logo.png" alt="">
-          <h1 style="float: left;">水滴管理系统</h1>
+          <h1 style="float: left;">管理系统</h1>
         </div>
         <div class="header-nav">
           <el-menu mode="horizontal" background-color="#212121" text-color="#ffffff" active-text-color="#ffffff"
@@ -85,15 +85,15 @@
 
             <template slot="title">
               <i class="fa fa-fw fa-user"></i>
-              <span slot="title">客户中心</span>
+              <span slot="title">游戏中心</span>
             </template>
 
             <el-menu-item index="/activation">
               <i class="fa fa-fw fa-user"></i>
-              <span slot="title">激活管理</span>
+              <span slot="title">游戏管理</span>
             </el-menu-item>
 
-            <el-menu-item index="/edition">
+            <!-- <el-menu-item index="/edition">
               <i class="fa fa-fw fa-cog"></i>
               <span slot="title">版本管理</span>
             </el-menu-item>
@@ -111,12 +111,12 @@
             <el-menu-item index="/userAdmin">
               <i class="fa fa-fw fa-users"></i>
               <span slot="title">用户管理</span>
-            </el-menu-item>
+            </el-menu-item> -->
 
 
           </el-submenu>
 
-          <el-submenu index="subject">
+          <!-- <el-submenu index="subject">
 
             <template slot="title">
               <i class="fa fa-fw fa-wpforms"></i>
@@ -128,9 +128,9 @@
               <span slot="title">科目管理</span>
             </el-menu-item>
 
-          </el-submenu>
+          </el-submenu> -->
 
-          <el-submenu index="admin">
+          <!-- <el-submenu index="admin">
 
             <template slot="title">
               <i class="fa fa-fw fa-cog"></i>
@@ -143,7 +143,7 @@
             </el-menu-item>
 
 
-          </el-submenu>
+          </el-submenu> -->
 
 
         </el-menu>
@@ -623,5 +623,8 @@
     color: #9d9d9d;
     background-color: #4c4c4c;
     border-color: #4c4c4c;
+  }
+  .el-dialog--center .el-dialog__footer{
+    background: #212121;
   }
 </style>
